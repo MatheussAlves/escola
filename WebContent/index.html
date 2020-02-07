@@ -1,10 +1,86 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-<p>Hello word</p>
-</body>
+ <html lang="en">
+ <head>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="favicon.ico"/>
+    <title>Sistema Escolar - Login</title>
+    <link rel="stylesheet" type="text/css"
+        href="resources/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="resources/css/bootstrap-vue.css">
+    <link type="text/css" rel="stylesheet" 
+        href="//unpkg.com/bootstrap@4.4.1/dist/css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" 
+        href="//unpkg.com/bootstrap-vue@2.1.0/dist/bootstrap-vue.min.css" />
+     
+ </head>
+ <body>
+	 <div id="main">
+	     <div>
+			 <b-navbar toggleable="lg" type="dark" variant="dark"/>
+			  <b-navbar-brand href=""><img 
+				src="https://www.acsi.com.br/images/2018/10/08/escola-place.png" 
+				width="35" weight="35"/> Escola </b-navbar-brand>
+			  <b-collapse id="nav-collapse" is-nav>
+	      		<b-navbar-nav>
+	        		<b-nav-item disabled href="">Cadastrar Produtos</b-nav-item>
+	        		<b-nav-item disabled href="">Cadastrar Fabricantes</b-nav-item>
+	        		<b-nav-item disabled href="">Teste xmlhttprequest</b-nav-item>
+	      		</b-navbar-nav>
+		</div>
+		<div>
+			<div container-fluid table align="center">
+			<p></p>
+			  <b-card title="Login" sub-title="" style="max-width: 50rem;" >
+				<form>
+					<b-card-text>
+					<div>
+						<div>
+							<b-form-group
+							id="fieldset-horizontal"
+							label-cols-sm="4"
+							label-cols-lg="3"
+							label="Username"
+							label-for="input-horizontal">
+							
+							<b-form-input v-model="usuario.username" required type="text" id="usuario"></b-form-input>
+							</b-form-group>
+						</div>
+					</div>
+					<div>
+						<div>
+							<b-form-group
+							id="fieldset-horizontal"
+							label-cols-sm="4"
+							label-cols-lg="3"
+							label="Password"
+							label-for="input-horizontal">
+							
+							<b-form-input v-model="usuario.password" required type="password" id="senha"></b-form-input>
+							</b-form-group>
+						</div>
+					</div>				 
+					</b-card-text>			
+				
+					<b-button  variant="danger" >Login</b-button>
+					<b-link href="#" class="card-link">Cadastrar</b-link>
+				</form>
+			  </b-card>
+			</div>
+		</div>
+		
+	</div>     
+     
+     
+     
+     
+     
+     
+    <script src="resources/js/vue.js"></script>
+	<script src="//polyfill.io/v3/polyfill.min.js?features=es2015%2CIntersectionObserver" crossorigin="anonymous"></script>
+	<script src="//unpkg.com/vue@2.6.11/dist/vue.min.js"></script>
+	<script src="//unpkg.com/bootstrap-vue@2.1.0/dist/bootstrap-vue.min.js"></script>
+	<script src="resources/js/axios.min.js"></script>
+	<script src="resources/js/index.js"></script>
+ </body>
 </html>
