@@ -124,7 +124,20 @@ public class UsuarioService {
     	}
     	return Response.status(Status.OK).build();
     }
-
+	@Path("/login")
+	@Produces(MediaType.APPLICATION_JSON)
+	@POST
+	public Response usuarioLogin(Usuario usuario) {
+		Boolean login;
+		try {
+			login = userDao.verificaUsuario(usuario);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Erro interno").build();
+		}
+		
+		return Response.status(Status.OK).entity(login).build();
+	}
 	public Usuario getUsuario() {
 		return usuario;
 	}

@@ -37,7 +37,7 @@ public class UsuarioServiceTest {
 		
 		return usuario;
 	}
-	@Test	
+	//@Test	
 	void testCadastroUsuario() {
 		Usuario usuario = usuarioCreate();
 		Response response = service.request().post(Entity.entity(usuario,
@@ -46,6 +46,51 @@ public class UsuarioServiceTest {
 		
 	}
 	
-	
+	@Test
+	void testaLoginUsuario() {
+		Boolean verificaLogin;
+		
+		Usuario usuario = new Usuario();
+		usuario.setSenha("admin");
+		usuario.setUsername("admin");
+		
+		WebTarget serv;
+		ClientConfig config = new ClientConfig();
+		Client client = ClientBuilder.newClient(config);
+		
+		serv = client.target("http://localhost:8080/escola/rs/usuarios/login");
+		Response response = serv.request().post(Entity.entity(usuario, MediaType.APPLICATION_JSON_TYPE));
+		
+		assertEquals(Response.Status.OK.getStatusCode(), response.getStatusInfo().getStatusCode());
+		
+		response.bufferEntity();
+		verificaLogin = response.readEntity(Boolean.class);
+		
+		assertEquals(true, verificaLogin);
+		
+		
+	}
+	@Test
+	void testaUsuarioNaoAutenticato() {
+		Boolean verificaLogin;
+		
+		Usuario usuario = new Usuario();
+		usuario.setUsername("a");
+		usuario.setSenha("a");
+		
+		WebTarget serv;
+		ClientConfig config = new ClientConfig();
+		Client client = ClientBuilder.newClient(config);
+		
+		serv = client.target("http://localhost:8080/escola/rs/usuarios/login");
+		Response response = serv.request().post(Entity.entity(usuario, MediaType.APPLICATION_JSON_TYPE));
+		
+		assertEquals(Response.Status.OK.getStatusCode(), response.getStatusInfo().getStatusCode());
+		
+		response.bufferEntity();
+		verificaLogin = response.readEntity(Boolean.class);
+		
+		assertEquals(false, verificaLogin);
+	}
 	
 }
