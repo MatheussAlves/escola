@@ -22,15 +22,53 @@
 				width="35" weight="35"/> Escola </b-navbar-brand>
 			  <b-collapse id="nav-collapse" is-nav>
 	      		<b-navbar-nav>
-	        		<b-nav-item disabled href="">Estudantes</b-nav-item>
-	        		<b-nav-item disabled href="">Professores</b-nav-item>
-	        		<b-nav-item disabled href="">...</b-nav-item>
+	        		<b-nav-item disabled href="">Cadastrar Produtos</b-nav-item>
+	        		<b-nav-item disabled href="">Cadastrar Fabricantes</b-nav-item>
+	        		<b-nav-item disabled href="">Teste xmlhttprequest</b-nav-item>
 	      		</b-navbar-nav>
+		</div>
+		<div>
+			<div container-fluid table align="center">
+			<br></br>
+			  <b-card title="Login" sub-title="" style="max-width: 50rem;" >
+				<form @submit="logarUsuario">
+					<b-card-text>
+					<div>
+						<div>
+							<b-form-group
+							id="fieldset-horizontal"
+							label-cols-sm="4"
+							label-cols-lg="3"
+							label="Username"
+							label-for="input-horizontal">
+							
+							<b-form-input v-model="usuario.username" required type="text" id="usuario"></b-form-input>
+							</b-form-group>
+						</div>
+					</div>
+					<div>
+						<div>
+							<b-form-group
+							id="fieldset-horizontal"
+							label-cols-sm="4"
+							label-cols-lg="3"
+							label="Password"
+							label-for="input-horizontal">
+							
+							<b-form-input v-model="usuario.password" required type="password" id="senha"></b-form-input>
+							</b-form-group>
+						</div>
+					</div>				 
+					</b-card-text>			
+				
+					<b-button type="submit" variant="danger" >Login</b-button>
+					<b-link href="#" class="card-link">Cadastrar</b-link>
+				</form>
+			  </b-card>
 			</div>
+		</div>
+		
 	</div>     
-     
-     
-     
      
      
      
@@ -39,6 +77,6 @@
 	<script src="//unpkg.com/vue@2.6.11/dist/vue.min.js"></script>
 	<script src="//unpkg.com/bootstrap-vue@2.1.0/dist/bootstrap-vue.min.js"></script>
 	<script src="resources/js/axios.min.js"></script>
-	<script src="resources/js/index.js"></script>
+	<script src="resources/js/login.js"></script>
  </body>
 </html>

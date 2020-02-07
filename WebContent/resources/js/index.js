@@ -9,5 +9,6 @@ var main = new Vue({
     created: function(){
         let vm =  this;
         vm.usuario.isAuth = false;
-    }
+    },
+    methods:{}
 })
