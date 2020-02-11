@@ -14,31 +14,33 @@
  <body>
 	<div id="main">
 		<div>
-			<b-navbar toggleable="lg" type="dark" variant="dark"/>
-			<b-navbar-brand href=""><img 
-				src="https://www.acsi.com.br/images/2018/10/08/escola-place.png" 
-				width="35" weight="35"/> Escola </b-navbar-brand>
-			<b-collapse id="nav-collapse" is-nav>
-				<b-navbar-nav>
-					<template v-if="usuarioLogado.tipo == 'ADMINISTRADOR'">
-						
-						<b-nav-item disabled href="">Estudantes</b-nav-item>
-						<b-nav-item disabled href="">Professores</b-nav-item>
-					</template>
-					<template v-if="usuarioLogado.tipo == 'ESTUDANTE'">
-						<b-nav-item disabled href="">Meus dados</b-nav-item>
-					</template>
-					<template v-if="usuarioLogado.tipo == 'PROFESSOR'">
-						<b-nav-item disabled href="">Meus dados</b-nav-item>
-						<b-nav-item disabled href="">Estudantes</b-nav-item>
-					</template>
-				</b-navbar-nav>
-			<b-navbar-nav class="ml-auto">
-				<b-nav-form>
-					<b-navbar-brand >Logado como: {{usuarioLogado.tipo}}</b-navbar-brand>
-					<b-button size="sm" class="my-2 my-sm-0" @click="sair">Sair</b-button>
-				</b-nav-form>
-			</b-navbar-nav>	
+			<template v-if="usuarioLogado.isAuth == true">
+				<b-navbar toggleable="lg" type="dark" variant="dark"/>
+				<b-navbar-brand href=""><img 
+					src="https://www.acsi.com.br/images/2018/10/08/escola-place.png" 
+					width="35" weight="35"/> Escola </b-navbar-brand>
+				<b-collapse id="nav-collapse" is-nav>
+					<b-navbar-nav>
+						<template v-if="usuarioLogado.tipo == 'ADMINISTRADOR'">
+							
+							<b-nav-item disabled href="">Estudantes</b-nav-item>
+							<b-nav-item disabled href="">Professores</b-nav-item>
+						</template>
+						<template v-if="usuarioLogado.tipo == 'ESTUDANTE'">
+							<b-nav-item disabled href="">Meus dados</b-nav-item>
+						</template>
+						<template v-if="usuarioLogado.tipo == 'PROFESSOR'">
+							<b-nav-item disabled href="">Meus dados</b-nav-item>
+							<b-nav-item disabled href="">Estudantes</b-nav-item>
+						</template>
+					</b-navbar-nav>
+				<b-navbar-nav class="ml-auto">
+					<b-nav-form>
+						<b-navbar-brand >Logado como: {{usuarioLogado.tipo}}</b-navbar-brand>
+						<b-button size="sm" class="my-2 my-sm-0" @click="sair">Sair</b-button>
+					</b-nav-form>
+				</b-navbar-nav>	
+			</template>
 		</div>
 	</div>     
      

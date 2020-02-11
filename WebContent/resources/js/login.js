@@ -25,6 +25,7 @@ var main = new Vue({
             xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
             xhr.onload = function(){
                 vm.usuario = JSON.parse(xhr.responseText);
+                vm.usuario.isAuth = true;
                 //console.log(vm.usuario.tipo)
                 if (xhr.readyState == 4 && xhr.status == "201") {
                     if(vm.usuario.tipo == null){
