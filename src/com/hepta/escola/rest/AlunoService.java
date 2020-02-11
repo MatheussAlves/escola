@@ -41,6 +41,7 @@ public class AlunoService {
 	public AlunoService() {
 		dao = new AlunoDAO(Aluno.class);
 	}
+	
 	/**
 	 * 
 	 * @param aluno
@@ -116,11 +117,7 @@ public class AlunoService {
 		}
 		return Response.status(Status.OK).build();
 	}
-	
-	
-	
-	
-	
+		
 	
 	public Aluno getAluno() {
 		return aluno;
