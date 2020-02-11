@@ -21,17 +21,12 @@
 					width="35" weight="35"/> Escola </b-navbar-brand>
 				<b-collapse id="nav-collapse" is-nav>
 					<b-navbar-nav>
-						<template v-if="usuarioLogado.tipo == 'ADMINISTRADOR'">
-							
+						<template v-if="usuarioLogado.tipo == 'ADMINISTRADOR'">							
 							<b-nav-item disabled href="">Estudantes</b-nav-item>
 							<b-nav-item disabled href="">Professores</b-nav-item>
 						</template>
-						<template v-if="usuarioLogado.tipo == 'ESTUDANTE'">
+						<template v-else="usuarioLogado.tipo == 'ESTUDANTE'">
 							<b-nav-item disabled href="">Meus dados</b-nav-item>
-						</template>
-						<template v-if="usuarioLogado.tipo == 'PROFESSOR'">
-							<b-nav-item disabled href="">Meus dados</b-nav-item>
-							<b-nav-item disabled href="">Estudantes</b-nav-item>
 						</template>
 					</b-navbar-nav>
 				<b-navbar-nav class="ml-auto">
@@ -42,6 +37,87 @@
 				</b-navbar-nav>	
 			</template>
 		</div>
+		<template v-if="usuarioLogado.tipo == 'ADMINISTRADOR'">
+			<b-row class="text-center">
+				<b-col></b-col>
+				<b-col cols="5">
+					<br>
+					<div>
+						<b-card title="Professores" sub-title="Professores cadastrados no sistema">
+							<template v-if="professores.length > 0">
+								<table  class="table">
+									<tr>
+										<th>Identificação</th>
+										<th>Materia</th>
+										<th>Nome</th>
+										<th>Turno</th>
+										<th></th>
+										<th></th>
+									</tr>
+										<tbody id="event-table" >
+											<tr v-for="professor in professores">
+											<td>{{ professor.id }}</td> 
+											<td>{{ professor.materia }}</td> 
+											<td>{{ professor.nome }}</td> 
+											<td>{{ professor.turno }}</td> 
+											<td><b-button class="btn btn-info" v-b-modal.modal-2 @click="">&#9998;</b-button>
+												<b-button class="btn btn-danger" @click="">&#10006;</b-button>
+											</td>
+											</tr>
+										</tbody>
+								</table >
+							</template>
+							<template v-else>
+								<h5 align="center">Não foi encontrado nenhum professor</h5>
+							</template>
+						</b-card>
+					</div>
+				</b-col>
+				<b-col></b-col>
+			  </b-row>
+		</template>
+		<template v-if="usuarioLogado.tipo == 'ADMINISTRADOR' || usuarioLogado.tipo == 'PROFESSOR'">
+			<b-row class="text-center">
+				<b-col></b-col>
+				<b-col cols="5">
+					<br>
+					<div>
+						<b-card title="Alunos" sub-title="Alunos cadastrados no sistema">
+							<template v-if="alunos.length > 0">
+								<table  class="table">
+									<tr>
+										<th>Identificação</th>
+										<th>Nome</th>
+										<th>Idade</th>
+										<th>Serie</th>
+										<th>Ensino</th>
+										<th></th>
+									</tr>
+										<tbody id="event-table" >
+											<tr v-for="aluno in alunos">
+											<td>{{ aluno.id }}</td> 
+											<td>{{ aluno.nome }}</td> 
+											<td>{{ aluno.idade }}</td> 
+											<td>{{ aluno.serie }}</td> 
+											<td>{{ aluno.ensino }}</td> 
+											<template v-if="usuarioLogado.tipo == 'ADMINISTRADOR'">
+												<td><b-button class="btn btn-info" v-b-modal.modal-2 @click="">&#9998;</b-button>
+													<b-button class="btn btn-danger" @click="">&#10006;</b-button>
+												</td>
+											</template>
+											</tr>
+										</tbody>
+								</table >
+							</template>
+							<template v-else>
+								<h5 align="center">Não foi encontrado nenhum aluno</h5>
+							</template>
+						</b-card>
+					</div>
+				</b-col>
+				<b-col></b-col>
+			  </b-row>
+		</template>
 	</div>     
      
      
