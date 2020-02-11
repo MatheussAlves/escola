@@ -12,39 +12,63 @@ var main = new Vue({
     },
     created: function(){
         let vm =  this;
-        vm.usuario.isAuth = false;
     },
     methods:{
         logarUsuario: function(){
             const vm = this;
             var xhr = new XMLHttpRequest();
-            var usuario = {}
-             usuario.username = vm.usuario.username;
-             usuario.senha = vm.usuario.password;
-            var json = JSON.stringify(usuario)
-            console.log(usuario)
+            var user = {}
+             user.username = vm.usuario.username;
+             user.senha = vm.usuario.senha;
+            var json = JSON.stringify(user)
             xhr.open('POST',vm.url+"/login",true);
             xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
             xhr.onload = function(){
-                var isLogin = JSON.parse(xhr.responseText);
-                vm.isAuth = isLogin
+                vm.usuario = JSON.parse(xhr.responseText);
+                //console.log(vm.usuario.tipo)
                 if (xhr.readyState == 4 && xhr.status == "201") {
-                    console.table(isLogin);
+                    if(vm.usuario.tipo == null){
+                        alert("Usuario ou senha invalidos!")
+                    }else{
+                        document.location.href="/escola/index.html"
+                    }
                 } else {
-                    console.error(isLogin);
+                    console.error("error -> ",vm.usuario);
                 }
-                if(vm.isAuth){
-                    document.location.href="/escola/index.html"
+                if(vm.usuario.tipo == null){
+                    alert("Usuario ou senha invalidos!")
                 }else{
-                    alert("Usuario ou senha invalidos")
+                    console.log(vm.usuario.tipo)
+                    myStorage = window.localStorage;
+                    myStorage.setItem('permission',vm.usuario.tipo);
+                    document.location.href="/escola/index.html"
                 }
             }
-           
+
             xhr.send(json)
-            this.showAlert();
+        },
+        logar: function(){
+            const vm = this;
+            var authUser;
+            axios.post(vm.url+"/login",{username: vm.usuario.username,
+                                        senha: vm.usuario.senha})
+            .then(response => {
+                authUser = response.data
+                if(authUser.tipo == null){
+                    alert("Usuario ou senha invalidos!")
+                }
+            }).catch(function(error){
+                console.log(error)
+            })
         },
         showAlert() {
             this.dismissCountDown = this.dismissSecs
+        },
+        returnUser(){
+            const vm = this;
+            return vm.usuario;
         }
-    }
+    },
+    
+
 })

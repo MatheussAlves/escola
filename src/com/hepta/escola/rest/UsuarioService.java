@@ -128,14 +128,18 @@ public class UsuarioService {
 	@Produces(MediaType.APPLICATION_JSON)
 	@POST
 	public Response usuarioLogin(Usuario usuario) {
-		Boolean login;
+		Usuario login = new Usuario();
 		try {
 			login = userDao.verificaUsuario(usuario);
+			System.out.println(login);
 		}catch(Exception e) {
 			e.printStackTrace();
-			return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Erro interno").build();
+			return Response.status(Status.OK).entity("Erro interno").build();
 		}
-		
+		System.out.println("Usuario - > "+login.getUsername());
+		System.out.println("Usuario - > "+login.getSenha());
+		System.out.println("Usuario - > "+login.getTipo().values());
+	
 		return Response.status(Status.OK).entity(login).build();
 	}
 	public Usuario getUsuario() {

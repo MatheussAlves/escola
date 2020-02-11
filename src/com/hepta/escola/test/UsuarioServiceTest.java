@@ -48,7 +48,7 @@ public class UsuarioServiceTest {
 	
 	@Test
 	void testaLoginUsuario() {
-		Boolean verificaLogin;
+		Usuario verificaLogin = new Usuario();
 		
 		Usuario usuario = new Usuario();
 		usuario.setSenha("admin");
@@ -64,15 +64,15 @@ public class UsuarioServiceTest {
 		assertEquals(Response.Status.OK.getStatusCode(), response.getStatusInfo().getStatusCode());
 		
 		response.bufferEntity();
-		verificaLogin = response.readEntity(Boolean.class);
+		verificaLogin = response.readEntity(Usuario.class);
 		
-		assertEquals(true, verificaLogin);
+		assertEquals((verificaLogin!=null), true);
 		
 		
 	}
 	@Test
 	void testaUsuarioNaoAutenticato() {
-		Boolean verificaLogin;
+		Usuario verificaLogin = new Usuario();
 		
 		Usuario usuario = new Usuario();
 		usuario.setUsername("a");
@@ -88,9 +88,9 @@ public class UsuarioServiceTest {
 		assertEquals(Response.Status.OK.getStatusCode(), response.getStatusInfo().getStatusCode());
 		
 		response.bufferEntity();
-		verificaLogin = response.readEntity(Boolean.class);
+		verificaLogin = response.readEntity(Usuario.class);
 		
-		assertEquals(false, verificaLogin);
+		assertEquals((verificaLogin.getUsername()==null), true);
 	}
 	
 }
