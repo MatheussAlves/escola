@@ -9,7 +9,12 @@ var main = new Vue({
     },
     created: function(){
         let vm =  this;
-        vm.usuarioLogado.tipo = localStorage.getItem('permission');
+        vm.usuarioLogado = JSON.parse(localStorage.getItem('usuario'));
     },
-    methods:{}
+    methods:{
+        sair: function(){
+            localStorage.clear();
+            document.location.href="/escola/login.html"
+        }
+    }
 })

@@ -38,9 +38,9 @@ var main = new Vue({
                 if(vm.usuario.tipo == null){
                     alert("Usuario ou senha invalidos!")
                 }else{
-                    console.log(vm.usuario.tipo)
+                    console.log(Object.values(vm.usuario.tipo))
                     myStorage = window.localStorage;
-                    myStorage.setItem('permission',vm.usuario.tipo);
+                    myStorage.setItem('usuario',JSON.stringify(vm.usuario));
                     document.location.href="/escola/index.html"
                 }
             }
