@@ -25,6 +25,7 @@ var main = new Vue({
             xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
             xhr.onload = function(){
                 vm.usuario = JSON.parse(xhr.responseText);
+                vm.usuario.isAuth = true;
                 //console.log(vm.usuario.tipo)
                 if (xhr.readyState == 4 && xhr.status == "201") {
                     if(vm.usuario.tipo == null){
@@ -38,9 +39,9 @@ var main = new Vue({
                 if(vm.usuario.tipo == null){
                     alert("Usuario ou senha invalidos!")
                 }else{
-                    console.log(vm.usuario.tipo)
+                    console.log(Object.values(vm.usuario.tipo))
                     myStorage = window.localStorage;
-                    myStorage.setItem('permission',vm.usuario.tipo);
+                    myStorage.setItem('usuario',JSON.stringify(vm.usuario));
                     document.location.href="/escola/index.html"
                 }
             }
