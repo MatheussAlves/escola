@@ -9,6 +9,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 import com.hepta.escola.enums.Turno;
 @Entity
@@ -33,7 +35,11 @@ public class Professor implements Serializable{
 	@Enumerated(EnumType.STRING)
 	@Column(name="TURNO")
 	private Turno turno;
-
+	
+	@OneToOne
+	@JoinColumn(name="ID_USUARIO")
+	private Usuario usuario;
+	
 	public Integer getId() {
 		return id;
 	}

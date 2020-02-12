@@ -1,0 +1,41 @@
+    body {
+        margin: 10px
+    }
+    .container {
+        width: 100vw;
+        height: 100vh;
+        background: #6C7A89;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center
+    }
+    .box {
+        width: 300px;
+        height: 300px;
+        background: #fff;
+    }
+	.grid-container {
+	  display: grid;
+	  grid-template-columns: 300px 300fr 300fr;
+	  grid-template-rows: 1fr 1fr 1fr;
+	  grid-template-areas: "A B C" "D E F" "G H I";
+	}
+	
+	.B { grid-area: B; }
+	
+	.A { grid-area: A; }
+	
+	.C { grid-area: C; }
+	
+	.D { grid-area: D; }
+	
+	.E { grid-area: E; }
+	
+	.F { grid-area: F; }
+	
+	.G { grid-area: G; }
+	
+	.H { grid-area: H; }
+	
+	.I { grid-area: I; }

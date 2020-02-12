@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="favicon.ico"/>
+    <title>Sistema Escolar - Login</title>
+    <link rel="stylesheet" type="text/css"
+        href="resources/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="resources/css/bootstrap-vue.css">
+    <link type="text/css" rel="stylesheet" 
+        href="//unpkg.com/bootstrap@4.4.1/dist/css/bootstrap.min.css"/>
+    <link type="text/css" rel="stylesheet" 
+        href="//unpkg.com/bootstrap-vue@2.4.0/dist/bootstrap-vue.css"/>    
+ </head>
+ <body>
+	 <div id="main">
+	     <div>
+			 <b-navbar toggleable="lg" type="dark" variant="dark"/>
+			  <b-navbar-brand href=""><img 
+				src="https://www.acsi.com.br/images/2018/10/08/escola-place.png" 
+				width="35" weight="35"/> Escola </b-navbar-brand>
+			  <b-collapse id="nav-collapse" is-nav>
+	      		<b-navbar-nav>
+	        		
+	      		</b-navbar-nav>
+		</div>
+		<div>
+			
+			<br></br>
+			<b-row>
+				<b-col></b-col>
+				<b-col cols="5">
+				  <b-card title="Cadastro" sub-title="" style="max-width: 50rem;" >
+					
+						<b-card-text>
+						<form>
+						  <div>
+						    <b-form-group
+						      id="fieldset-1"
+						    
+						      label="Informe o usuario"
+						      label-for="input-1"				     
+						    >
+						      <b-form-input id="input-1" ></b-form-input>
+						    </b-form-group>
+						  </div>
+						  <div>
+						    <b-form-group
+						      id="fieldset-1"
+						    
+						      label="Informe a sua senha"
+						      label-for="input-1"					     
+						    >
+						      <b-form-input id="input-1" ></b-form-input>
+						    </b-form-group>
+						  </div>
+						  <b-button @click="" variant="danger" >Cadastrar</b-button>
+						  <b-link href="/escola/login.html" class="card-link">Voltar</b-link>
+						</form>				 
+						</b-card-text>			
+					
+						
+					
+				  </b-card>
+				  </b-col>
+				  <b-col></b-col>
+			  </b-row>
+			
+		</div>
+		
+	</div>     
+     
+    <script src="resources/js/vue.js"></script>
+	<script src="//polyfill.io/v3/polyfill.min.js?features=es2015%2CIntersectionObserver" crossorigin="anonymous"></script>
+	<script src="//unpkg.com/vue@2.6.11/dist/vue.min.js"></script>
+	<script src="//unpkg.com/bootstrap-vue@2.1.0/dist/bootstrap-vue.min.js"></script>
+	<script src="resources/js/axios.min.js"></script>
+	<script src="resources/js/cadastro.js"></script>
+ </body>
+</html>
