@@ -32,6 +32,42 @@ public class UsuarioDAO extends genericDAO<Usuario>{
 			return userAuth;
 		}
 	}
+	/**
+	 * 
+	 * @param usuario
+	 * @return
+	 */
+	public Boolean verificaUsername(Usuario usuario) {
+		EntityManager em = HibernateUtil.getEntityManager();
+		Query query = em.createQuery("select u from Usuario u where lower(u.username) like lower(concat('%', :pLogin,'%'))")
+				.setParameter("pLogin", usuario.getUsername());
+		
+		return query.getResultList().isEmpty();
+	}
+	public Usuario createUsuario(Usuario usuario) throws Exception {
+		Boolean checkExists;
+		checkExists = verificaUsername(usuario);
+		Usuario user = new Usuario();
+		if(checkExists) {
+			EntityManager em = HibernateUtil.getEntityManager();
+			try {
+				em.getTransaction().begin();
+				em.persist(usuario);
+				em.refresh(usuario);
+				em.flush();
+				em.getTransaction().commit();
+				return usuario;
+			}catch (Exception e){
+				em.getTransaction().rollback();
+				throw new Exception(e);
+			}finally{
+				em.close();
+			}
+		}
+		
+		
+		return usuario;
+	}
 		/*userAuth = (Usuario)query.getSingleResult();
 		System.out.println("...");
 		System.out.println("Usuario - > "+userAuth.getUsername());

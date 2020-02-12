@@ -15,7 +15,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.hepta.escola.entity.Aluno;
+import com.hepta.escola.entity.Usuario;
 import com.hepta.escola.enums.Ensino;
+import com.hepta.escola.enums.TipoUsuario;
 
 public class EscolaServiceTest {
 	private static WebTarget service;
@@ -35,17 +37,35 @@ public class EscolaServiceTest {
 		aluno.setIdade(10);
 		aluno.setSerie("5");
 		aluno.setEnsino(Ensino.FUNDAMENTAL);
+		
 		return aluno;
 	}
 	
 	@Test
-	void testCadastraAluno() {
+	void testCadastraUsuarioAluno() {
 		Aluno aluno = createAluno();
-		Response response = service.request().post(Entity.entity(aluno, MediaType.APPLICATION_JSON_TYPE));
+		Usuario usuario = new Usuario();
+		usuario.setSenha("estudante");
+		usuario.setUsername("estudante");
+		usuario.setTipo(TipoUsuario.ESTUDANTE);
+		
+		
+		
+		WebTarget serv;
+		ClientConfig config = new ClientConfig();
+		Client client = ClientBuilder.newClient(config);
+		serv = client.target("http://localhost:8080/escola/rs/usuarios/createUsuario");
+		
+		Response response = serv.request().post(Entity.entity(usuario, MediaType.APPLICATION_JSON_TYPE));
+		assertEquals(Response.Status.OK.getStatusCode(), response.getStatusInfo().getStatusCode());
+		
+		aluno.setUsuario(usuario);
+		
+		response = service.request().post(Entity.entity(aluno, MediaType.APPLICATION_JSON_TYPE));
 		assertEquals(Response.Status.OK.getStatusCode(), response.getStatusInfo().getStatusCode());
 	}
 	
-	@Test
+	//@Test
 	void testGetAllAlunos() {
 		
 		Response response = service.request().get();
@@ -53,8 +73,8 @@ public class EscolaServiceTest {
 		
 		
 	}
-	@Test
-	void testDeleteAllAlunos() {
+	//@Test
+	void testDeleteAlunos() {
 		
 		WebTarget serv;
 		ClientConfig config = new ClientConfig();

@@ -26,44 +26,47 @@
 	      		</b-navbar-nav>
 		</div>
 		<div>
-			<div container-fluid table align="center">
+			
 			<br></br>
-			  <b-card title="Login" sub-title="" style="max-width: 50rem;" >
-				
-					<b-card-text>
-					<div>
-						<div>
-							<b-form-group
-							id="fieldset-horizontal"
-							label-cols-sm="4"
-							label-cols-lg="3"
-							label="Username"
-							label-for="input-horizontal">
-							
-							<b-form-input v-model="usuario.username" required type="text" id="usuario"></b-form-input>
-							</b-form-group>
-						</div>
-					</div>
-					<div>
-						<div>
-							<b-form-group
-							id="fieldset-horizontal"
-							label-cols-sm="4"
-							label-cols-lg="3"
-							label="Password"
-							label-for="input-horizontal">
-							
-							<b-form-input v-model="usuario.senha" required type="password" id="senha"></b-form-input>
-							</b-form-group>
-						</div>
-					</div>				 
-					</b-card-text>			
-				
-					<b-button @click="logarUsuario" variant="danger" >Login</b-button>
-					<b-link href="/escola/cadastro.html" class="card-link">Fazer cadastro</b-link>
-				
-			  </b-card>
-			</div>
+			<b-row>
+				<b-col></b-col>
+				<b-col cols="5">
+				  <b-card title="Cadastro" sub-title="" style="max-width: 50rem;" >
+					
+						<b-card-text>
+						<form>
+						  <div>
+						    <b-form-group
+						      id="fieldset-1"
+						    
+						      label="Informe o usuario"
+						      label-for="input-1"				     
+						    >
+						      <b-form-input id="input-1" ></b-form-input>
+						    </b-form-group>
+						  </div>
+						  <div>
+						    <b-form-group
+						      id="fieldset-1"
+						    
+						      label="Informe a sua senha"
+						      label-for="input-1"					     
+						    >
+						      <b-form-input id="input-1" ></b-form-input>
+						    </b-form-group>
+						  </div>
+						  <b-button @click="" variant="danger" >Cadastrar</b-button>
+						  <b-link href="/escola/login.html" class="card-link">Voltar</b-link>
+						</form>				 
+						</b-card-text>			
+					
+						
+					
+				  </b-card>
+				  </b-col>
+				  <b-col></b-col>
+			  </b-row>
+			
 		</div>
 		
 	</div>     
@@ -73,6 +76,6 @@
 	<script src="//unpkg.com/vue@2.6.11/dist/vue.min.js"></script>
 	<script src="//unpkg.com/bootstrap-vue@2.1.0/dist/bootstrap-vue.min.js"></script>
 	<script src="resources/js/axios.min.js"></script>
-	<script src="resources/js/login.js"></script>
+	<script src="resources/js/cadastro.js"></script>
  </body>
 </html>

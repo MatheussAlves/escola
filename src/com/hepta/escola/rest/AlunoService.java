@@ -57,6 +57,7 @@ public class AlunoService {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Erro ao buscar alunos no sistema").build();
 		}
 		
 		return Response.status(Status.OK).build();

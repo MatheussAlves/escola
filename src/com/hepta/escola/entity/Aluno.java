@@ -9,6 +9,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 import com.hepta.escola.enums.Ensino;
 
@@ -34,7 +36,10 @@ public class Aluno implements Serializable{
 	@Enumerated(EnumType.STRING)
 	@Column(name="NIVEL_ENSINO")
 	private Ensino ensino;
-
+	
+	@OneToOne
+	@JoinColumn(name="ID_USUARIO")
+	private Usuario usuario;
 	
 	
 	public Integer getId() {
@@ -75,6 +80,14 @@ public class Aluno implements Serializable{
 
 	public void setEnsino(Ensino ensino) {
 		this.ensino = ensino;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 	
 	
