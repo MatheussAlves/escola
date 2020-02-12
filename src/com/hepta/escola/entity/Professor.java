@@ -71,6 +71,14 @@ public class Professor implements Serializable{
 	public void setTurno(Turno turno) {
 		this.turno = turno;
 	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 	
 	
 	

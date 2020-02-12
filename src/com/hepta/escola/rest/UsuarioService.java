@@ -150,6 +150,7 @@ public class UsuarioService {
 		Usuario user = new Usuario();
 		Boolean existe;
 		existe = userDao.verificaUsername(usuario); //verifica se retornou algum usuario já existente. //true não retornou false retornou
+		System.out.println(existe);
 		if(existe == true) {
 			try {
 				user = userDao.createUsuario(usuario);
@@ -158,9 +159,10 @@ public class UsuarioService {
 				e.printStackTrace();
 				return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Erro interno").build();
 			}
+		}else {
+			return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Erro interno").build();
 		}
 		
-		System.out.println("-->"+user.getUsername()+user.getId());
 		return Response.status(Status.OK).entity(user).build();
 	}
 	public Usuario getUsuario() {

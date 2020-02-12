@@ -65,6 +65,7 @@ public class ProfessorService {
             } catch (Exception e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
+                return Response.status(Status.INTERNAL_SERVER_ERROR).build();
             }
             return Response.status(Status.OK).build();
         }

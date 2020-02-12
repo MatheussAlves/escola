@@ -40,7 +40,7 @@ public class UsuarioServiceTest {
 	@Test	
 	void testCadastroUsuario() {
 		Usuario usuario = usuarioCreate();
-		usuario.setUsername("admin");
+		usuario.setUsername("matheus");
 		
 		WebTarget serv;
 		ClientConfig config = new ClientConfig();

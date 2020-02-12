@@ -44,6 +44,7 @@ public class EscolaServiceTest {
 	@Test
 	void testCadastraUsuarioAluno() {
 		Aluno aluno = createAluno();
+		Integer criouUsuario,criouEstudante;
 		Usuario usuario = new Usuario();
 		usuario.setSenha("estudante");
 		usuario.setUsername("estudante");
@@ -57,12 +58,16 @@ public class EscolaServiceTest {
 		serv = client.target("http://localhost:8080/escola/rs/usuarios/createUsuario");
 		
 		Response response = serv.request().post(Entity.entity(usuario, MediaType.APPLICATION_JSON_TYPE));
-		assertEquals(Response.Status.OK.getStatusCode(), response.getStatusInfo().getStatusCode());
+		criouUsuario = response.getStatusInfo().getStatusCode();
+		
+		response.bufferEntity();
+		usuario = response.readEntity(Usuario.class);
 		
 		aluno.setUsuario(usuario);
 		
 		response = service.request().post(Entity.entity(aluno, MediaType.APPLICATION_JSON_TYPE));
-		assertEquals(Response.Status.OK.getStatusCode(), response.getStatusInfo().getStatusCode());
+		criouEstudante = response.getStatusInfo().getStatusCode();
+		assertEquals(criouUsuario,criouEstudante);
 	}
 	
 	//@Test

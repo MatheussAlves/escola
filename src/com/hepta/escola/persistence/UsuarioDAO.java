@@ -48,15 +48,15 @@ public class UsuarioDAO extends genericDAO<Usuario>{
 		Boolean checkExists;
 		checkExists = verificaUsername(usuario);
 		Usuario user = new Usuario();
+		System.out.println(checkExists);
 		if(checkExists) {
 			EntityManager em = HibernateUtil.getEntityManager();
 			try {
 				em.getTransaction().begin();
 				em.persist(usuario);
-				em.refresh(usuario);
+				//em.refresh(usuario);
 				em.flush();
 				em.getTransaction().commit();
-				return usuario;
 			}catch (Exception e){
 				em.getTransaction().rollback();
 				throw new Exception(e);
@@ -64,8 +64,6 @@ public class UsuarioDAO extends genericDAO<Usuario>{
 				em.close();
 			}
 		}
-		
-		
 		return usuario;
 	}
 		/*userAuth = (Usuario)query.getSingleResult();
