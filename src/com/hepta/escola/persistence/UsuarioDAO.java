@@ -39,7 +39,7 @@ public class UsuarioDAO extends genericDAO<Usuario>{
 	 */
 	public Boolean verificaUsername(Usuario usuario) {
 		EntityManager em = HibernateUtil.getEntityManager();
-		Query query = em.createQuery("select u from Usuario u where lower(u.username) like lower(concat('%', :pLogin,'%'))")
+		Query query = em.createQuery("select u from Usuario u where lower(u.username) = lower(:pLogin)")
 				.setParameter("pLogin", usuario.getUsername());
 		
 		return query.getResultList().isEmpty();

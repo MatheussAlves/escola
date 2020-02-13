@@ -1,12 +1,32 @@
 var main = new Vue({
     el:"#main",
     data:{
+        //DADOS
         usuarioLogado:{username: " ",
                 password:" ",
                 tipo:" ",
                 isAuth:false},
         professores:[],
         alunos:[],
+        aluno:{
+            id:"",
+            nome:"",
+            idade: "",
+            ensino:"",
+            serie:"",
+            usuario:""
+        },
+        professor:{
+            id:"",
+            nome:"",
+            materia:"",
+            turno:"",
+            usuario:"",
+        },
+        usuario:{
+            
+        }
+        //URLS
         urlProfessores: "http://localhost:8080/escola/rs/professores",
         urlAlunos:"http://localhost:8080/escola/rs/alunos"
     //usuario = require('../resources/js/login.js').usuario
@@ -21,8 +41,14 @@ var main = new Vue({
         }else{
             vm.usuarioLogado = userAux;
         }
-        vm.getProfessores();
-        vm.getAlunos();
+        if(userAux == 'DOCENTE' || userAux == 'ADMINISTRADOR'){
+            vm.getAlunos();
+        }
+        if(userAux == 'ADMINISTRADOR'){
+            vm.getProfessores();
+        }
+        
+        
     },
     methods:{
         sair: function(){
