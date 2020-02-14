@@ -132,17 +132,20 @@ var main = new Vue({
             vm.toEdit = object;
             if(vm.toEdit.materia != null){
                 vm.turnos = dados.optionsTurno;
-
             }else{
                vm.graus = dados.optionsGrau;
                switch(vm.grauSelecionado){
                    case 'MATERNAL':
+                       vm.series = dados.optionsMaternal;
                        break;
                    case 'FUNDAMENTAL':
+                       vm.series = dados.optionsFundamental;
                        break;
                    case 'FUNDAMENTAL2':
+                       vm.series = dados.optionsFundamentalDois
                        break;
                    case 'MEDIO':
+                       vm.series = dados.optionsMedio
                        break;
                }
                
