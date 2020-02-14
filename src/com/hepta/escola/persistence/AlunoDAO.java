@@ -15,8 +15,21 @@ public class AlunoDAO extends genericDAO<Aluno>{
 		// TODO Auto-generated constructor stub
 	}
 	
-	
-	
+	public Aluno findUser(Integer id) throws Exception{
+		EntityManager em = HibernateUtil.getEntityManager();
+		Aluno aluno = new Aluno();
+		try {
+			Query query = em.createQuery("SELECT a FROM Aluno a WHERE a.usuario.id = :pId")
+					.setParameter("pId", id);
+		aluno = (Aluno) query.getSingleResult();
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new Exception(e);
+		}finally{
+			em.close();
+		}
+		return aluno;
+	}
 	
 	/*public void save(Aluno aluno) throws Exception{
 		EntityManager em = HibernateUtil.getEntityManager();

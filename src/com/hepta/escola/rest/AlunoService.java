@@ -13,6 +13,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
@@ -21,6 +22,7 @@ import javax.ws.rs.core.Response.Status;
 
 import com.hepta.escola.entity.Aluno;
 import com.hepta.escola.persistence.AlunoDAO;
+
 
 
 @Path("/alunos")
@@ -119,6 +121,22 @@ public class AlunoService {
 		return Response.status(Status.OK).build();
 	}
 		
+	@Path("/user")
+	@Produces(MediaType.APPLICATION_JSON)
+	@GET
+	public Response getUsuario(@QueryParam("id") Integer id) {
+		Aluno aluno = new Aluno();
+		List<Aluno> alunosEncontrados = new ArrayList<>();
+		try {
+			aluno = dao.findUser(id);
+		}catch (Exception e){
+			e.printStackTrace();
+			return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Erro ao buscar usuario"+e.toString()+"<<--").build();
+		}
+		//GenericEntity<List<Aluno>> entity = new GenericEntity<List<Aluno>>(alunosEncontrados) {};
+		//GenericEntity<Aluno> aluno = new GenericEntity<Aluno>(Aluno.class, aluno);
+		return Response.status(Status.OK).entity(aluno).build();
+	}
 	
 	public Aluno getAluno() {
 		return aluno;

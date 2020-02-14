@@ -2,6 +2,9 @@ package com.hepta.escola.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -41,7 +44,7 @@ public class EscolaServiceTest {
 		return aluno;
 	}
 	
-	@Test
+	//@Test
 	void testCadastraUsuarioAluno() {
 		Aluno aluno = createAluno();
 		Integer criouUsuario,criouEstudante;
@@ -68,6 +71,27 @@ public class EscolaServiceTest {
 		response = service.request().post(Entity.entity(aluno, MediaType.APPLICATION_JSON_TYPE));
 		criouEstudante = response.getStatusInfo().getStatusCode();
 		assertEquals(criouUsuario,criouEstudante);
+	}
+	@Test
+	void testaGetUsuario() {
+		WebTarget serv;
+		ClientConfig config = new ClientConfig();
+		Client client = ClientBuilder.newClient(config);
+		//List<Aluno> alunosEncontrados = new ArrayList<>();
+		
+		
+		
+		serv = client.target("http://localhost:8080/escola/rs/alunos/user?id="+29);
+		Response response = serv.request().get();
+		
+		Aluno aluno = new Aluno();
+		
+		response.bufferEntity();
+		aluno = response.readEntity(Aluno.class);
+		System.out.println(aluno.getNome());
+		
+		assertEquals(Response.Status.OK.getStatusCode(),response.getStatusInfo().getStatusCode());
+		
 	}
 	
 	//@Test

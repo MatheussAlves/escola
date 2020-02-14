@@ -13,6 +13,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
@@ -164,7 +165,8 @@ public class UsuarioService {
 		}
 		
 		return Response.status(Status.OK).entity(user).build();
-	}
+	}	
+	
 	public Usuario getUsuario() {
 		return usuario;
 	}

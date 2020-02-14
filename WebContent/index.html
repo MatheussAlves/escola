@@ -21,12 +21,12 @@
 					width="35" weight="35"/> Escola </b-navbar-brand>
 				<b-collapse id="nav-collapse" is-nav>
 					<b-navbar-nav>
-						<template v-if="usuarioLogado.tipo == 'ADMINISTRADOR'">							
+						<template v-if="usuarioLogado.tipo == 'ADMINISTRADOR' || usuarioLogado.tipo == 'DOCENTE'">							
 							<b-nav-item disabled href="">Estudantes</b-nav-item>
 							<b-nav-item disabled href="">Professores</b-nav-item>
 						</template>
 						<template v-else="usuarioLogado.tipo == 'ESTUDANTE'">
-							<b-nav-item disabled href="">Meus dados</b-nav-item>
+							<b-nav-item href="/escola/index.html">Meus dados</b-nav-item>
 						</template>
 					</b-navbar-nav>
 				<b-navbar-nav class="ml-auto">
@@ -117,6 +117,27 @@
 				</b-col>
 				<b-col></b-col>
 			  </b-row>
+		</template>
+		<template v-if="usuarioLogado.tipo == 'ESTUDANTE'">
+			<b-row>
+				<b-col></b-col>
+				<b-col cols="5">
+				<br>
+				<div>
+					<b-card title="Aluno" sub-title="Seus dados no sistema">
+						<p><strong>Seu nome</strong></p>
+						<p><em>{{aluno.nome}}</em></p>
+						<p><strong>Idade</strong></p>
+						<p><em>{{aluno.idade}}</em></p>
+						<p><strong>Tipo de grau </strong></p>
+						<p><em>{{aluno.ensino}}</em></p>
+						<p><strong>Serie</strong></p>
+						<p><em>{{aluno.serie}}</em></p>
+					</b-card>
+				</div>
+				</b-col>
+				<b-col></b-col>
+			</b-row>
 		</template>
 	</div>     
      

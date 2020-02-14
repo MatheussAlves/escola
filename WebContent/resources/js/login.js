@@ -2,7 +2,9 @@ var main = new Vue({
     el:"#main",
     data:{
         url: "http://localhost:8080/escola/rs/usuarios",
-        usuario:{username: "",
+        usuario:{
+            id:"",
+            username: "",
                 senha:"",
                 tipo:"",
                 isAuth:""},
@@ -39,7 +41,7 @@ var main = new Vue({
                 if(vm.usuario.tipo == null){
                     alert("Usuario ou senha invalidos!")
                 }else{
-                    console.log(Object.values(vm.usuario.tipo))
+                    //console.log(Object.values(vm.usuario.tipo))
                     myStorage = window.localStorage;
                     myStorage.setItem('usuario',JSON.stringify(vm.usuario));
                     document.location.href="/escola/index.html"
