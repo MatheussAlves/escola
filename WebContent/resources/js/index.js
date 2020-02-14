@@ -47,7 +47,7 @@ var main = new Vue({
             vm.usuarioLogado = userAux;
         }
         console.log(userAux)
-        
+
        switch(userAux.tipo){
            case 'DOCENTE':
                 vm.getAlunos();          
@@ -116,6 +116,18 @@ var main = new Vue({
                 }
             }
             xhr.send();
+        },
+        editAluno: function(){
+
+        },
+        editProfessor: function(){
+
+        },
+        deleteAluno: function(){
+
+        },
+        deleteProfessor: function(){
+            
         }
     }
 })
