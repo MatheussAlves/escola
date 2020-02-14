@@ -146,6 +146,42 @@
 								<div>		  
 									<b-modal id="modal-2" title="Edição de aluno">
 									  <p class="my-4">Editar aluno <strong>{{toEdit.nome}}</strong></p>
+									  <div>
+										<b-form-group
+										  id="fieldset-12"
+										
+										  label="Informe o nome"
+										  label-for="input-1"				     
+										>
+										  <b-form-input id="input-1" required v-model="aluno.nome"></b-form-input>
+										</b-form-group>
+										<b-form-group
+										id="fieldset-12"
+									  
+										label="Informe o nome"
+										label-for="input-1"				     
+									  >
+										<b-form-input id="input-1" required v-model="aluno.idade"></b-form-input>
+									  </b-form-group>
+									  <div>
+										<b-form-group
+										  id="fieldset-14"
+				
+										label="Informe o ano do ensino medio"
+										label-for="input-1">
+										  <b-form-select v-model="grauSelecionado" required :options="graus"></b-form-select>
+									  </b-form-group>
+									 </div>
+									 <div>
+										<b-form-group
+										  id="fieldset-14"
+				
+										label="Informe o ano do ensino medio"
+										label-for="input-1">
+										  <b-form-select v-model="aluno.serie" required :options="series"></b-form-select>
+									  </b-form-group>
+									 </div>
+									  </div>
 									</b-modal>
 								</div>
 								<!-- FIM MODAL DE EDIÇÃO   -->

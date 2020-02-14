@@ -134,7 +134,7 @@ var main = new Vue({
                 vm.turnos = dados.optionsTurno;
             }else{
                vm.graus = dados.optionsGrau;
-               switch(vm.grauSelecionado){
+               switch(vm.object.ensino){
                    case 'MATERNAL':
                        vm.series = dados.optionsMaternal;
                        break;
