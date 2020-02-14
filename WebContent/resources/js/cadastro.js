@@ -1,5 +1,5 @@
-var main = new Vue({
-	el:"#main",
+var cadastro = new Vue({
+	el:"#cadastro",
 	data:{
 	//URLS
 	url:"http://localhost:8080/escola/rs/usuarios",
@@ -144,5 +144,16 @@ var main = new Vue({
 			return (this.password != this.passwordToConfirm);
 		}
 	}
-})
+});
+var optionsGrau = cadastro.$data.optionsGrau;
+var optionsMaternal = cadastro.$data.optionsMaternal;
+var optionsFundamental = cadastro.$data.optionsFundamental;
+var optionsFundamentalDois = cadastro.$data.optionsFundamentalDois;
+var optionsMedio = cadastro.$data.optionsMedio;
+var optionsTurno = cadastro.$data.optionsTurno;
+
+export {
+	optionsGrau, optionsMaternal,optionsFundamental,optionsFundamentalDois,optionsMedio,optionsTurno
+};
+
 	

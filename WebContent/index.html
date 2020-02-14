@@ -60,7 +60,7 @@
 											<td>{{ professor.materia }}</td> 
 											<td>{{ professor.nome }}</td> 
 											<td>{{ professor.turno }}</td> 
-											<td><b-button class="btn btn-info" v-b-modal.modal-2 @click="">&#9998;</b-button>
+											<td><b-button class="btn btn-info" v-b-modal.modal-1 @click="loadEdicao(professor,1)">&#9998;</b-button>
 												<b-button class="btn btn-danger" @click="">&#10006;</b-button>
 											</td>
 											</tr>
@@ -101,13 +101,54 @@
 											<td>{{ aluno.serie }}</td> 
 											<td>{{ aluno.ensino }}</td> 
 											<template v-if="usuarioLogado.tipo == 'ADMINISTRADOR'">
-												<td><b-button class="btn btn-info" v-b-modal.modal-2 @click="">&#9998;</b-button>
+												<td><b-button class="btn btn-info" v-b-modal.modal-2  @click="loadEdicao(aluno,2)">&#9998;</b-button>
 													<b-button class="btn btn-danger" @click="">&#10006;</b-button>
 												</td>
 											</template>
 											</tr>
 										</tbody>
 								</table >
+								<!-- MODAL DE EDIÇÃO   -->
+								<div>		  
+									<b-modal id="modal-1" title="Edição de professor">
+									  <p class="my-4">Editar professor <strong>{{toEdit.nome}}</strong></p>
+									  <div>
+										<b-form-group
+										  id="fieldset-12"
+										
+										  label="Informe o nome"
+										  label-for="input-1"				     
+										>
+										  <b-form-input id="input-1" required v-model="professor.nome"></b-form-input>
+										</b-form-group>
+									  </div>
+									  <div>
+										<b-form-group
+										  id="fieldset-13"
+										
+										  label="Informe a materia"
+										  label-for="input-1"				     
+										>
+										  <b-form-input id="input-2" required v-model="professor.materia"></b-form-input>
+										</b-form-group>
+									  </div>
+									  <div>
+										<b-form-group
+										  id="fieldset-14"
+				
+										label="Informe o ano do ensino medio"
+										label-for="input-1">
+										  <b-form-select v-model="professor.turno" required :options="turnos"></b-form-select>
+									  	</b-form-group>
+									   </div>
+									</b-modal>
+								</div>
+								<div>		  
+									<b-modal id="modal-2" title="Edição de aluno">
+									  <p class="my-4">Editar aluno <strong>{{toEdit.nome}}</strong></p>
+									</b-modal>
+								</div>
+								<!-- FIM MODAL DE EDIÇÃO   -->
 							</template>
 							<template v-else>
 								<h5 align="center">Não foi encontrado nenhum aluno</h5>
@@ -145,12 +186,12 @@
      
      
      
-     
     <script src="resources/js/vue.js"></script>
 	<script src="//polyfill.io/v3/polyfill.min.js?features=es2015%2CIntersectionObserver" crossorigin="anonymous"></script>
 	<script src="//unpkg.com/vue@2.6.11/dist/vue.min.js"></script>
 	<script src="//unpkg.com/bootstrap-vue@2.1.0/dist/bootstrap-vue.min.js"></script>
 	<script src="resources/js/axios.min.js"></script>
-	<script src="resources/js/index.js"></script>
+	<script src="resources/js/index.js" type="module"></script>
+	<script src="resources/js/cadastro.js" type="module"></script>
  </body>
 </html>

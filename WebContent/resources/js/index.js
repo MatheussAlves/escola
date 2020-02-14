@@ -1,3 +1,4 @@
+import * as dados from "./cadastro.js"
 var main = new Vue({
     el:"#main",
     data:{
@@ -10,6 +11,7 @@ var main = new Vue({
                 isAuth:false},
         professores:[],
         alunos:[],
+        toEdit:{},
         aluno:{
             id:"",
             nome:"",
@@ -33,8 +35,12 @@ var main = new Vue({
         },
         //URLS
         urlProfessores: "http://localhost:8080/escola/rs/professores",
-        urlAlunos:"http://localhost:8080/escola/rs/alunos"
-    //usuario = require('../resources/js/login.js').usuario
+        urlAlunos:"http://localhost:8080/escola/rs/alunos",
+        //OPCOES
+        graus:{},
+        series:{},
+        turnos:{},
+        grauSelecionado:{}
     },
     created: function(){
         let vm =  this;
@@ -50,12 +56,15 @@ var main = new Vue({
 
        switch(userAux.tipo){
            case 'DOCENTE':
-                vm.getAlunos();          
+                vm.getAlunos();
+                break;          
            case 'ADMINISTRADOR':
                vm.getProfessores();
                vm.getAlunos();
+               break;
             case 'ESTUDANTE':
                 vm.getPerfilAluno();
+                break;
        }
         
     },
@@ -117,6 +126,29 @@ var main = new Vue({
             }
             xhr.send();
         },
+        loadEdicao:function(object,num){
+            this.$bvModal.show('modal-'+num);
+            var vm = this;
+            vm.toEdit = object;
+            if(vm.toEdit.materia != null){
+                vm.turnos = dados.optionsTurno;
+
+            }else{
+               vm.graus = dados.optionsGrau;
+               switch(vm.grauSelecionado){
+                   case 'MATERNAL':
+                       break;
+                   case 'FUNDAMENTAL':
+                       break;
+                   case 'FUNDAMENTAL2':
+                       break;
+                   case 'MEDIO':
+                       break;
+               }
+               
+            }
+            
+        },
         editAluno: function(){
 
         },
@@ -127,7 +159,7 @@ var main = new Vue({
 
         },
         deleteProfessor: function(){
-            
+
         }
     }
 })
