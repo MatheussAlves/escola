@@ -16,6 +16,22 @@ public class ProfessorDAO extends genericDAO<Professor>{
 		super(classe);
 		// TODO Auto-generated constructor stub
 	}
+	
+	public Professor findByUser(Integer id) throws Exception {
+		EntityManager em = HibernateUtil.getEntityManager();
+		Professor professor = null;
+		try {
+			Query query = em.createQuery("select u from Professor u where u.id_usuario = :pId")
+					.setParameter("pId", id);
+			professor = (Professor) query.getSingleResult();
+		} catch (Exception e) {
+			em.getTransaction().rollback();
+			throw new Exception(e);
+		} finally {
+			em.close();
+		}
+		return professor;
+	}
 
 	/*public void save(Professor professor) throws Exception {
 		EntityManager em = HibernateUtil.getEntityManager();

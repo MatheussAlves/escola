@@ -13,6 +13,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
@@ -134,14 +135,38 @@ public class UsuarioService {
 			System.out.println(login);
 		}catch(Exception e) {
 			e.printStackTrace();
-			return Response.status(Status.OK).entity("Erro interno").build();
+			return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Erro interno").build();
 		}
 		System.out.println("Usuario - > "+login.getUsername());
 		System.out.println("Usuario - > "+login.getSenha());
-		System.out.println("Usuario - > "+login.getTipo().values());
+		System.out.println("Usuario - > "+login.getTipo());
 	
 		return Response.status(Status.OK).entity(login).build();
 	}
+	
+	@Path("/createUsuario")
+	@Produces(MediaType.APPLICATION_JSON)
+	@POST
+	public Response createUsuario(Usuario usuario) {
+		Usuario user = new Usuario();
+		Boolean existe;
+		existe = userDao.verificaUsername(usuario); //verifica se retornou algum usuario já existente. //true não retornou false retornou
+		System.out.println(existe);
+		if(existe == true) {
+			try {
+				user = userDao.createUsuario(usuario);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Erro interno").build();
+			}
+		}else {
+			return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Erro interno").build();
+		}
+		
+		return Response.status(Status.OK).entity(user).build();
+	}	
+	
 	public Usuario getUsuario() {
 		return usuario;
 	}

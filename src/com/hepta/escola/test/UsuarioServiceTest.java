@@ -37,16 +37,54 @@ public class UsuarioServiceTest {
 		
 		return usuario;
 	}
-	//@Test	
+	@Test	
 	void testCadastroUsuario() {
 		Usuario usuario = usuarioCreate();
-		Response response = service.request().post(Entity.entity(usuario,
+		usuario.setUsername("matheus");
+		
+		WebTarget serv;
+		ClientConfig config = new ClientConfig();
+		Client client = ClientBuilder.newClient(config);
+		
+		Boolean verificaExiste;
+		
+		serv = client.target("http://localhost:8080/escola/rs/usuarios/createUsuario");
+		
+		Response response = serv.request().post(Entity.entity(usuario,
 				MediaType.APPLICATION_JSON_TYPE));
+		
 		assertEquals(Response.Status.OK.getStatusCode(), response.getStatusInfo().getStatusCode());
 		
+		//response.bufferEntity();
+		//verificaExiste = response.readEntity(Boolean.class);
+		
+		//assertEquals(verificaExiste, true);
+		
 	}
-	
-	@Test
+	//@Test
+	void testCadastroUsuarioRepetido() {
+		Usuario usuario = usuarioCreate();
+		usuario.setUsername("Matheus");
+		
+		WebTarget serv;
+		ClientConfig config = new ClientConfig();
+		Client client = ClientBuilder.newClient(config);
+		
+		Boolean verificaExiste;
+		
+		serv = client.target("http://localhost:8080/escola/rs/usuarios/createUsuario");
+		
+		Response response = serv.request().post(Entity.entity(usuario,
+				MediaType.APPLICATION_JSON_TYPE));
+		
+		assertEquals(Response.Status.OK.getStatusCode(), response.getStatusInfo().getStatusCode());
+		
+		response.bufferEntity();
+		verificaExiste = response.readEntity(Boolean.class);
+		
+		assertEquals(verificaExiste, false);
+	}
+	//@Test
 	void testaLoginUsuario() {
 		Usuario verificaLogin = new Usuario();
 		
@@ -59,7 +97,8 @@ public class UsuarioServiceTest {
 		Client client = ClientBuilder.newClient(config);
 		
 		serv = client.target("http://localhost:8080/escola/rs/usuarios/login");
-		Response response = serv.request().post(Entity.entity(usuario, MediaType.APPLICATION_JSON_TYPE));
+		Response response = serv.request().post(Entity.entity(usuario,
+				MediaType.APPLICATION_JSON_TYPE));
 		
 		assertEquals(Response.Status.OK.getStatusCode(), response.getStatusInfo().getStatusCode());
 		
@@ -70,7 +109,7 @@ public class UsuarioServiceTest {
 		
 		
 	}
-	@Test
+	//@Test
 	void testaUsuarioNaoAutenticato() {
 		Usuario verificaLogin = new Usuario();
 		
@@ -92,5 +131,6 @@ public class UsuarioServiceTest {
 		
 		assertEquals((verificaLogin.getUsername()==null), true);
 	}
+
 	
 }

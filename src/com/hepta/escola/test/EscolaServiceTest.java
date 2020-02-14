@@ -2,6 +2,9 @@ package com.hepta.escola.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -15,7 +18,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.hepta.escola.entity.Aluno;
+import com.hepta.escola.entity.Usuario;
 import com.hepta.escola.enums.Ensino;
+import com.hepta.escola.enums.TipoUsuario;
 
 public class EscolaServiceTest {
 	private static WebTarget service;
@@ -35,17 +40,61 @@ public class EscolaServiceTest {
 		aluno.setIdade(10);
 		aluno.setSerie("5");
 		aluno.setEnsino(Ensino.FUNDAMENTAL);
+		
 		return aluno;
 	}
 	
-	@Test
-	void testCadastraAluno() {
+	//@Test
+	void testCadastraUsuarioAluno() {
 		Aluno aluno = createAluno();
-		Response response = service.request().post(Entity.entity(aluno, MediaType.APPLICATION_JSON_TYPE));
-		assertEquals(Response.Status.OK.getStatusCode(), response.getStatusInfo().getStatusCode());
+		Integer criouUsuario,criouEstudante;
+		Usuario usuario = new Usuario();
+		usuario.setSenha("estudante");
+		usuario.setUsername("estudante");
+		usuario.setTipo(TipoUsuario.ESTUDANTE);
+		
+		
+		
+		WebTarget serv;
+		ClientConfig config = new ClientConfig();
+		Client client = ClientBuilder.newClient(config);
+		serv = client.target("http://localhost:8080/escola/rs/usuarios/createUsuario");
+		
+		Response response = serv.request().post(Entity.entity(usuario, MediaType.APPLICATION_JSON_TYPE));
+		criouUsuario = response.getStatusInfo().getStatusCode();
+		
+		response.bufferEntity();
+		usuario = response.readEntity(Usuario.class);
+		
+		aluno.setUsuario(usuario);
+		
+		response = service.request().post(Entity.entity(aluno, MediaType.APPLICATION_JSON_TYPE));
+		criouEstudante = response.getStatusInfo().getStatusCode();
+		assertEquals(criouUsuario,criouEstudante);
+	}
+	@Test
+	void testaGetUsuario() {
+		WebTarget serv;
+		ClientConfig config = new ClientConfig();
+		Client client = ClientBuilder.newClient(config);
+		//List<Aluno> alunosEncontrados = new ArrayList<>();
+		
+		
+		
+		serv = client.target("http://localhost:8080/escola/rs/alunos/user?id="+29);
+		Response response = serv.request().get();
+		
+		Aluno aluno = new Aluno();
+		
+		response.bufferEntity();
+		aluno = response.readEntity(Aluno.class);
+		System.out.println(aluno.getNome());
+		
+		assertEquals(Response.Status.OK.getStatusCode(),response.getStatusInfo().getStatusCode());
+		
 	}
 	
-	@Test
+	//@Test
 	void testGetAllAlunos() {
 		
 		Response response = service.request().get();
@@ -53,8 +102,8 @@ public class EscolaServiceTest {
 		
 		
 	}
-	@Test
-	void testDeleteAllAlunos() {
+	//@Test
+	void testDeleteAlunos() {
 		
 		WebTarget serv;
 		ClientConfig config = new ClientConfig();

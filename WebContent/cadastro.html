@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="favicon.ico"/>
+    <title>Sistema Escolar - Login</title>
+    <link rel="stylesheet" type="text/css"
+        href="resources/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="resources/css/bootstrap-vue.css">
+    <link type="text/css" rel="stylesheet" 
+        href="//unpkg.com/bootstrap@4.4.1/dist/css/bootstrap.min.css"/>
+    <link type="text/css" rel="stylesheet" 
+        href="//unpkg.com/bootstrap-vue@2.4.0/dist/bootstrap-vue.css"/>    
+ </head>
+ <body>
+	 <div id="main">
+	     <div>
+			 <b-navbar toggleable="lg" type="dark" variant="dark"/>
+			  <b-navbar-brand href=""><img 
+				src="https://www.acsi.com.br/images/2018/10/08/escola-place.png" 
+				width="35" weight="35"/> Escola </b-navbar-brand>
+			  <b-collapse id="nav-collapse" is-nav>
+	      		<b-navbar-nav>
+	        		
+	      		</b-navbar-nav>
+		</div>
+		<div>
+
+			<br></br>
+			<b-row>
+				<b-col></b-col>
+				<b-col> 
+					<b-alert v-model="mostrarAlerta" variant="danger" dismissible>
+					As senhas nao conferem.
+					</b-alert> 
+					<b-alert v-model="mostrarAlertaUsuarioExistente" variant="danger" dismissible>
+						Este usuario já existe no sistema.
+					</b-alert>
+				</b-col>
+				<b-col></b-col>
+			</b-row>
+			<b-row>
+				<b-col></b-col>
+				<b-col cols="5">
+				  <b-card title="Cadastro de usuario" sub-title="" style="max-width: 50rem;" bg-variant="light" >
+						<b-card-text>
+						<form @submit.prevent="cadastrarUsuario">
+						  <div>
+						    <b-form-group
+						      id="fieldset-1"
+						    
+						      label="Informe o usuario"
+						      label-for="nome"				     
+						    >
+						      <b-form-input id="nome" required v-model="usuario.username"></b-form-input>
+						    </b-form-group>
+						  </div>
+						  <div>
+						    <b-form-group
+						      id="fieldset-2"
+						    
+						      label="Informe a sua senha"
+						      label-for="senha"					     
+						    >
+						      <b-form-input id="senha" required v-model="password" type="password"></b-form-input>
+						    </b-form-group>
+						  </div>
+						  <div>
+						    <b-form-group
+						      id="fieldset-3"
+						    
+						      label="Confirme a sua senha"
+						      label-for="senhaParaConfirmar"					     
+						    >
+						      <b-form-input id="senhaParaConfirmar" required v-model="passwordToConfirm" type="password"></b-form-input>
+						    </b-form-group>
+						  </div>
+						  <div>
+						  	<b-form-group
+						  	  id="fieldset-4"
+						    
+						      label="Informe se você é um estudante ou um professor"
+						      label-for="tipo">
+								<b-form-select v-model="tipoSelecionado" required :options="options"></b-form-select>
+							</b-form-group>
+						  </div>
+						  <template v-if="tipoSelecionado == 'ESTUDANTE'">
+							<h5>Informe os dados do estudante</h5>
+							<div>
+								<b-form-group
+								  id="fieldset-5"
+								
+								  label="Informe o nome"
+								  label-for="nomeAluno"				     
+								>
+								  <b-form-input id="nomeAluno" required v-model="aluno.nome"></b-form-input>
+								</b-form-group>
+							</div>
+							<div>
+								<b-form-group
+								  id="fieldset-6"
+								
+								  label="Informe a idade"
+								  label-for="idade"				     
+								>
+								  <b-form-input id="idade" required v-model="aluno.idade" type="number"></b-form-input>
+								</b-form-group>
+							</div>
+							<div>
+								<b-form-group
+								  id="fieldset-7"
+							  
+								label="Informe o grau de ensino"
+								label-for="grau">
+								  <b-form-select v-model="grauSelecionado" required :options="optionsGrau"></b-form-select>
+							  </b-form-group>
+							</div>
+							<template v-if="grauSelecionado == 'MATERNAL'">
+								<div>
+									<b-form-group
+									  id="fieldset-8"
+								  
+									label="Informe qual maternal"
+									label-for="input-1">
+									  <b-form-select v-model="serieSelecionada" required :options="optionsMaternal"></b-form-select>
+								  </b-form-group>
+								</div>								
+							</template>
+							<template v-if="grauSelecionado == 'FUNDAMENTAL'">
+								<div>
+									<b-form-group
+									  id="fieldset-9"
+								  
+									label="Informe a serie"
+									label-for="input-1">
+									  <b-form-select v-model="serieSelecionada" required :options="optionsFundamental"></b-form-select>
+								  </b-form-group>
+								</div>								
+							</template>
+							<template v-if="grauSelecionado == 'FUNDAMENTAL2'">
+								<div>
+									<b-form-group
+									  id="fieldset-10"
+								  
+									label="Informe a serie"
+									label-for="input-1">
+									  <b-form-select v-model="serieSelecionada"  required :options="optionsFundamentalDois"></b-form-select>
+								  </b-form-group>
+								</div>								
+							</template>
+							<template v-if="grauSelecionado == 'MEDIO'">
+								<div>
+									<b-form-group
+									  id="fieldset-11"
+			
+									label="Informe o ano do ensino medio"
+									label-for="input-1">
+									  <b-form-select v-model="serieSelecionada" required :options="optionsMedio"></b-form-select>
+								  </b-form-group>
+								</div>								
+							</template>
+						  </template>
+						  <template v-if="tipoSelecionado == 'DOCENTE'">
+							  <h5>Informe os dados do professor</h5>
+							  <div>
+								<b-form-group
+								  id="fieldset-12"
+								
+								  label="Informe o nome"
+								  label-for="input-1"				     
+								>
+								  <b-form-input id="input-1" required v-model="professor.nome"></b-form-input>
+								</b-form-group>
+							  </div>
+							  <div>
+								<b-form-group
+								  id="fieldset-13"
+								
+								  label="Informe a materia"
+								  label-for="input-1"				     
+								>
+								  <b-form-input id="input-1" required v-model="professor.materia"></b-form-input>
+								</b-form-group>
+							  </div>
+							  <div>
+								<b-form-group
+								  id="fieldset-14"
+		
+								label="Informe o ano do ensino medio"
+								label-for="input-1">
+								  <b-form-select v-model="professor.turno" required :options="optionsTurno"></b-form-select>
+							  </b-form-group>
+							</div>
+						  </template>
+						  <template v-if="loading">
+							<b-button variant="primary" disabled>
+								<b-spinner small></b-spinner>
+								<span class="sr-only">Loading...</span>
+							  </b-button>							
+						  </template>
+						  <template v-else>
+							<b-button type="submit" variant="danger" v-on:submit="cadastrarUsuario">Cadastrar</b-button>
+							<b-link href="/escola/login.html" class="card-link">Voltar</b-link>
+						  </template>
+						</form>				 
+						</b-card-text>			
+				  </b-card>
+				  </b-col>
+				  <b-col></b-col>
+			  </b-row>
+			
+		</div>
+		
+	</div>     
+     
+    <script src="resources/js/vue.js"></script>
+	<script src="//polyfill.io/v3/polyfill.min.js?features=es2015%2CIntersectionObserver" crossorigin="anonymous"></script>
+	<script src="//unpkg.com/vue@2.6.11/dist/vue.min.js"></script>
+	<script src="//unpkg.com/bootstrap-vue@2.1.0/dist/bootstrap-vue.min.js"></script>
+	<script src="resources/js/axios.min.js"></script>
+	<script src="resources/js/cadastro.js"></script>
+ </body>
+</html>
